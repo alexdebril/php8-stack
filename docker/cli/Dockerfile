@@ -19,6 +19,7 @@ RUN set -ex &&\
  wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/bin/pickle &&\
  chmod +x /usr/bin/pickle &&\
  pickle install -n mongodb &&\
+ pickle install -n redis-5.3.2 &&\
  docker-php-ext-enable mongodb &&\
  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
