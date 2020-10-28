@@ -15,6 +15,7 @@ RUN set -ex &&\
  pickle install -n redis &&\
  pickle install -n amqp &&\
  pickle install -n mongodb &&\
+ pickle install -n xdebug &&\
  docker-php-ext-configure intl &&\
  docker-php-ext-enable mongodb &&\
  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
