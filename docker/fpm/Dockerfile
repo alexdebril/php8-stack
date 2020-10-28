@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.0.0RC2-fpm
 
 RUN chown -R www-data: /var/www/html
 
@@ -11,8 +11,9 @@ RUN set -ex &&\
  apt-get install -y --no-install-recommends wget unzip libzip-dev libicu-dev &&\
  wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/bin/pickle &&\
  chmod +x /usr/bin/pickle &&\
- docker-php-ext-install -j 8 opcache intl zip &&\
- pickle install -n redis-5.3.2 &&\
+ docker-php-ext-install -j 8 opcache pdo_mysql intl zip &&\
+ pickle install -n redis &&\
+ pickle install -n amqp &&\
  pickle install -n mongodb &&\
  docker-php-ext-configure intl &&\
  docker-php-ext-enable mongodb &&\
