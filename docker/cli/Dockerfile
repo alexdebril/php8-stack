@@ -15,7 +15,7 @@ RUN groupadd -g ${DOCKER_GID} php &&\
 RUN set -ex &&\
  apt-get update &&\
  apt-get install -y --no-install-recommends wget unzip libzip-dev zlib1g-dev libicu-dev &&\
- docker-php-ext-install -j 8 zip intl &&\
+ docker-php-ext-install -j 8 pdo_mysql zip intl &&\
  wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/bin/pickle &&\
  chmod +x /usr/bin/pickle &&\
  pickle install -n mongodb &&\

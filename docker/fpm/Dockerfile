@@ -11,7 +11,9 @@ RUN set -ex &&\
  apt-get install -y --no-install-recommends wget unzip libzip-dev libicu-dev &&\
  wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/bin/pickle &&\
  chmod +x /usr/bin/pickle &&\
- docker-php-ext-install -j 8 intl zip &&\
+ docker-php-ext-install -j 8 opcache pdo_mysql intl zip &&\
+ pickle install -n redis &&\
+ pickle install -n amqp &&\
  pickle install -n mongodb &&\
  docker-php-ext-configure intl &&\
  docker-php-ext-enable mongodb &&\
