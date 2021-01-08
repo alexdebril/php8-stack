@@ -1,4 +1,4 @@
-FROM php:8.0.0RC3-fpm
+FROM php:8.0.0-fpm
 
 RUN chown -R www-data: /var/www/html
 
@@ -8,16 +8,12 @@ ENV APP_ENV=${APP_ENV}
 
 RUN set -ex &&\
  apt-get update &&\
- apt-get install -y --no-install-recommends wget unzip libzip-dev libicu-dev &&\
- wget https://github.com/FriendsOfPHP/pickle/releases/latest/download/pickle.phar -O /usr/bin/pickle &&\
- chmod +x /usr/bin/pickle &&\
+ apt-get install -y --no-install-recommends unzip libzip-dev libicu-dev &&\
  docker-php-ext-install -j 8 opcache pdo_mysql intl zip &&\
- pickle install -n redis &&\
- pickle install -n amqp &&\
- pickle install -n mongodb &&\
- pickle install -n xdebug &&\
+ pecl install -n redis xdebug mongodb &&\
  docker-php-ext-configure intl &&\
  docker-php-ext-enable mongodb &&\
+ docker-php-ext-enable xdebug &&\
  rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
 USER www-data
